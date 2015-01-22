@@ -13,6 +13,9 @@
 
 import sys, os, string
 
+# For hosting on readthedocs.org - see html_theme option below
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
 # If your extensions are in another directory, add it here. If the directory
 # is relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
@@ -87,11 +90,13 @@ pygments_style = 'sphinx'
 
 # Options for HTML output
 # -----------------------
-html_theme = 'geoserver'
-html_theme_path = ['../../themes']
-
-if os.environ.get('HTML_THEME_PATH'):
-  html_theme_path.append(os.environ.get('HTML_THEME_PATH'))
+if on_rtd:
+  html_theme = 'default'
+else
+  html_theme = 'geoserver'
+  html_theme_path = ['../../themes']
+  if os.environ.get('HTML_THEME_PATH'):
+    html_theme_path.append(os.environ.get('HTML_THEME_PATH'))
 
 # The style sheet to use for HTML and HTML Help pages. A file of that name
 # must exist either in Sphinx' static/ path, or in one of the custom paths
@@ -198,7 +203,7 @@ latex_elements = {
     urlcolor = [rgb]{0,0.46,0.63}
 	}
 
-	
+
 """
 }
 
